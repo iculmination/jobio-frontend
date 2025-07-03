@@ -1,0 +1,22 @@
+#!/bin/sh
+
+# Path to the commit message file
+COMMIT_MSG_FILE="$1"
+COMMIT_MSG=$(head -1 "$COMMIT_MSG_FILE")
+
+# Skip merge commits
+if echo "$COMMIT_MSG" | grep -qE "^Merge "; then
+  exit 0
+fi
+
+# Check conventional commit format
+if ! echo "$COMMIT_MSG" | grep -qE "^(feat|fix|chore|docs|test|style|refactor|perf|build|ci|revert)(\(.+?\))?: .{1,}$"; then
+    echo "Aborting commit. Your commit message is invalid." >&2
+    exit 1
+fi
+
+# Check line length (max 88 characters)
+if ! echo "$COMMIT_MSG" | grep -qE "^.{1,88}$"; then
+    echo "Aborting commit. Your commit message is too long." >&2
+    exit 1
+fi

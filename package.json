@@ -1,0 +1,41 @@
+{
+  "name": "jobio-frontend",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "check:format": "prettier --write \"./!(node_modules|.next)/**/*.{ts,tsx,js,jsx}\"",
+    "check:typescript": "tsc --noEmit -p .",
+    "check:eslint": "eslint . --ext .ts,.tsx,.js,.jsx --fix",
+    "check": "npm run check:format && npm run check:typescript && npm run check:eslint",
+    "prepare": "husky"
+  },
+  "dependencies": {
+    "next": "15.2.0",
+    "prettier": "^3.6.2",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "15.2.0",
+    "eslint-config-prettier": "^10.1.5",
+    "typescript": "^5"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "prettier --write",
+      "eslint --fix"
+    ],
+    "*.{json,css,md}": [
+      "prettier --write"
+    ]
+  }
+}
