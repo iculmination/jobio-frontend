@@ -1,37 +1,38 @@
-"use client"
+"use client";
 
-import { type ReactNode, createContext, useRef, useContext } from "react"
-import { useStore } from "zustand"
+import { type ReactNode, createContext, useContext, useRef } from "react";
 
-import { type CounterStore, createCounterStore } from "@/src/app/providers/with-zustand"
+import { useStore } from "zustand";
 
-export type CounterStoreApi = ReturnType<typeof createCounterStore>
+import { type CounterStore, createCounterStore } from "@/app/providers/with-zustand";
 
-export const CounterStoreContext = createContext<CounterStoreApi | undefined>(undefined)
+export type CounterStoreApi = ReturnType<typeof createCounterStore>;
+
+export const CounterStoreContext = createContext<CounterStoreApi | undefined>(undefined);
 
 export interface CounterStoreProviderProps {
-  children: ReactNode
+    children: ReactNode;
 }
 
 export const CounterStoreProvider = ({ children }: CounterStoreProviderProps) => {
-  const storeRef = useRef<CounterStoreApi | null>(null)
-  if (storeRef.current === null) {
-    storeRef.current = createCounterStore()
-  }
+    const storeRef = useRef<CounterStoreApi | null>(null);
+    if (storeRef.current === null) {
+        storeRef.current = createCounterStore();
+    }
 
-  return (
-    <CounterStoreContext.Provider value={storeRef.current}>
-      {children}
-    </CounterStoreContext.Provider>
-  )
-}
+    return (
+        <CounterStoreContext.Provider value={storeRef.current}>
+            {children}
+        </CounterStoreContext.Provider>
+    );
+};
 
 export const useCounterStore = <T,>(selector: (store: CounterStore) => T): T => {
-  const counterStoreContext = useContext(CounterStoreContext)
+    const counterStoreContext = useContext(CounterStoreContext);
 
-  if (!counterStoreContext) {
-    throw new Error(`useCounterStore must be used within CounterStoreProvider`)
-  }
+    if (!counterStoreContext) {
+        throw new Error(`useCounterStore must be used within CounterStoreProvider`);
+    }
 
-  return useStore(counterStoreContext, selector)
-}
+    return useStore(counterStoreContext, selector);
+};
