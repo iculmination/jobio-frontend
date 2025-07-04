@@ -1,0 +1,10 @@
+{
+    "language": {
+        "select-language": "Select Language"
+    },
+    "test-counter": {
+        "count": "Count",
+        "decrement-count": "Decrement Count",
+        "increment-count": "Increment Count"
+    }
+}

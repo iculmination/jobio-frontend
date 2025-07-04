@@ -1,0 +1,10 @@
+{
+    "language": {
+        "select-language": "Оберіть мову"
+    },
+    "test-counter": {
+        "count": "Лічильник",
+        "decrement-count": "Декрементувати",
+        "increment-count": "Інкрементувати"
+    }
+}

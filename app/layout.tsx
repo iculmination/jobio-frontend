@@ -5,6 +5,8 @@ import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
 import { ThemeProvider } from "@mui/material/styles";
 
 import { CounterStoreProvider } from "@/app/providers/counter-store-provider";
+import { ReactQueryProvider } from "@/app/providers/with-react-query";
+import TranslationsProvider from "@/app/providers/with-translations";
 
 import { theme } from "@/shared/lib";
 
@@ -22,13 +24,23 @@ export const metadata: Metadata = {
     description: "Jobio"
 };
 
-export default function RootLayout({ children }: LayoutProps) {
+interface RootLayoutProps extends LayoutProps {
+    params: Promise<{ locale: string }>;
+}
+
+export default async function RootLayout({ children, params }: RootLayoutProps) {
+    const { locale } = await params;
+
     return (
-        <html lang='en'>
+        <html lang={locale}>
             <body className={`${roboto.variable}`}>
                 <AppRouterCacheProvider options={{ enableCssLayer: true }}>
                     <ThemeProvider theme={theme}>
-                        <CounterStoreProvider>{children}</CounterStoreProvider>
+                        <TranslationsProvider locale={locale}>
+                            <ReactQueryProvider>
+                                <CounterStoreProvider>{children}</CounterStoreProvider>
+                            </ReactQueryProvider>
+                        </TranslationsProvider>
                     </ThemeProvider>
                 </AppRouterCacheProvider>
             </body>
