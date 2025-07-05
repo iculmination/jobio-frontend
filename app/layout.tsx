@@ -3,10 +3,10 @@ import { Roboto } from "next/font/google";
 
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
 import { ThemeProvider } from "@mui/material/styles";
+import { NextIntlClientProvider } from "next-intl";
 
 import { CounterStoreProvider } from "@/app/providers/counter-store-provider";
 import { ReactQueryProvider } from "@/app/providers/with-react-query";
-import TranslationsProvider from "@/app/providers/with-translations";
 
 import { theme } from "@/shared/lib";
 
@@ -36,11 +36,11 @@ export default async function RootLayout({ children, params }: RootLayoutProps) 
             <body className={`${roboto.variable}`}>
                 <AppRouterCacheProvider options={{ enableCssLayer: true }}>
                     <ThemeProvider theme={theme}>
-                        <TranslationsProvider locale={locale}>
+                        <NextIntlClientProvider>
                             <ReactQueryProvider>
                                 <CounterStoreProvider>{children}</CounterStoreProvider>
                             </ReactQueryProvider>
-                        </TranslationsProvider>
+                        </NextIntlClientProvider>
                     </ThemeProvider>
                 </AppRouterCacheProvider>
             </body>
