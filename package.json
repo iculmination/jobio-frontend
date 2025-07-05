@@ -10,7 +10,9 @@
         "check:typescript": "tsc --noEmit -p .",
         "check:eslint": "eslint . --ext .ts,.tsx,.js,.jsx --fix",
         "check": "npm run check:format && npm run check:typescript && npm run check:eslint",
-        "prepare": "husky"
+        "prepare": "husky",
+        "storybook": "storybook dev -p 6006",
+        "build-storybook": "storybook build"
     },
     "dependencies": {
         "@emotion/cache": "^11.14.0",
@@ -28,8 +30,13 @@
         "zustand": "^5.0.6"
     },
     "devDependencies": {
+        "@chromatic-com/storybook": "^4.0.1",
         "@eslint/js": "^9.29.0",
         "@next/eslint-plugin-next": "^15.3.4",
+        "@storybook/addon-a11y": "^9.0.15",
+        "@storybook/addon-docs": "^9.0.15",
+        "@storybook/addon-onboarding": "^9.0.15",
+        "@storybook/addon-vitest": "^9.0.15",
         "@tanstack/eslint-plugin-query": "^5.81.2",
         "@trivago/prettier-plugin-sort-imports": "^5.2.2",
         "@types/node": "^20",
@@ -41,10 +48,17 @@
         "eslint-plugin-import": "^2.32.0",
         "eslint-plugin-promise": "^7.2.1",
         "eslint-plugin-react": "^7.37.5",
+        "eslint-plugin-storybook": "^9.0.15",
         "eslint-plugin-unused-imports": "^4.1.4",
         "sass": "^1.89.2",
+        "storybook": "^9.0.15",
         "typescript": "^5",
-        "typescript-eslint": "^8.34.1"
+        "typescript-eslint": "^8.34.1",
+        "@storybook/nextjs-vite": "^9.0.15",
+        "vitest": "^3.2.4",
+        "@vitest/browser": "^3.2.4",
+        "playwright": "^1.53.2",
+        "@vitest/coverage-v8": "^3.2.4"
     },
     "lint-staged": {
         "*.{js,jsx,ts,tsx}": [
