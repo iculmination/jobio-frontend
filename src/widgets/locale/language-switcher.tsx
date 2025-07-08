@@ -17,7 +17,7 @@ export const LanguageSwitcher = () => {
     const handleLanguageSwitch = (event: SelectChangeEvent) => {
         const newLocale = event.target.value;
 
-        const segments = pathname.split("/");
+        const segments = pathname?.split("/") || [];
         segments[1] = newLocale;
         const newPath = segments.join("/") || "/";
 
