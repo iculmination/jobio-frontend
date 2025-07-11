@@ -19,5 +19,10 @@ const nextConfig: NextConfig = {
     }
 };
 
+// eslint-disable-next-line
+const withBundleAnalyzer = require("@next/bundle-analyzer")({
+    enabled: process.env.ANALYZE === "true"
+});
+
 const withNextIntl = createNextIntlPlugin("src/app/i18n/request.ts");
-export default withNextIntl(nextConfig);
+export default withNextIntl(withBundleAnalyzer(nextConfig));

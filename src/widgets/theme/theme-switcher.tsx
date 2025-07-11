@@ -14,18 +14,7 @@ export const ThemeSwitcher = () => {
     }
 
     return (
-        <Box
-            sx={{
-                display: "flex",
-                width: "100%",
-                alignItems: "center",
-                justifyContent: "center",
-                bgcolor: "background.default",
-                color: "text.primary",
-                borderRadius: 1,
-                p: 3,
-                minHeight: "56px"
-            }}>
+        <Box>
             <FormControl>
                 <FormLabel id='demo-theme-toggle'>Theme</FormLabel>
                 <RadioGroup

@@ -1,0 +1,134 @@
+@import "../design-tokens";
+
+$badge-sizes: (
+    small: (
+        padding: spacing(1) spacing(2),
+        font-size: font-size(xs),
+        line-height: map-get($line-heights, none)
+    ),
+    medium: (
+        padding: spacing(2) spacing(3),
+        font-size: font-size(sm),
+        line-height: map-get($line-heights, tight)
+    ),
+    large: (
+        padding: spacing(2) spacing(4),
+        font-size: font-size(base),
+        line-height: map-get($line-heights, normal)
+    )
+);
+
+@mixin badge-variant($color) {
+    background-color: $color;
+    color: color(white);
+
+    &.outlined {
+        background-color: transparent;
+        color: $color;
+        border: 1px solid $color;
+    }
+
+    &:hover {
+        background-color: darken($color, 10%);
+
+        &.outlined {
+            background-color: rgba($color, 0.1);
+        }
+    }
+}
+
+@mixin badge-size($padding, $font-size, $line-height) {
+    padding: $padding;
+    font-size: $font-size;
+    line-height: $line-height;
+}
+
+.badge {
+    display: inline-flex;
+    cursor: default;
+    user-select: none;
+    align-items: center;
+    justify-content: center;
+    font-weight: map-get($font-weights, medium);
+    border-radius: radius(md);
+    transition: map-get($transitions, fast);
+    white-space: nowrap;
+
+    &.rounded {
+        border-radius: radius(full);
+    }
+}
+
+.primary {
+    @include badge-variant(color(primary));
+}
+
+.secondary {
+    @include badge-variant(color(secondary));
+}
+
+.success {
+    @include badge-variant(color(success));
+}
+
+.warning {
+    @include badge-variant(color(warning));
+}
+
+.error {
+    @include badge-variant(color(error));
+}
+
+.info {
+    @include badge-variant(color(info));
+}
+
+@each $name, $props in $badge-sizes {
+    .#{$name} {
+        @include badge-size(
+            map-get($props, padding),
+            map-get($props, font-size),
+            map-get($props, line-height)
+        );
+    }
+}
+
+@media (max-width: map-get($breakpoints, sm)) {
+    .badge {
+        &.large {
+            @include badge-size(
+                spacing(2) spacing(3),
+                font-size(sm),
+                map-get($line-heights, tight)
+            );
+        }
+    }
+}
+
+:global(.dark) {
+    .badge {
+        &.primary {
+            @include badge-variant(lighten(color(primary), 10%));
+        }
+
+        &.secondary {
+            @include badge-variant(lighten(color(secondary), 10%));
+        }
+
+        &.success {
+            @include badge-variant(lighten(color(success), 10%));
+        }
+
+        &.warning {
+            @include badge-variant(lighten(color(warning), 10%));
+        }
+
+        &.error {
+            @include badge-variant(lighten(color(error), 10%));
+        }
+
+        &.info {
+            @include badge-variant(lighten(color(info), 10%));
+        }
+    }
+}
