@@ -1,0 +1,50 @@
+@use "@/shared/ui/variables" as *;
+@use "@/shared/ui/mixins" as *;
+
+.card {
+    @include card-modern;
+    border-radius: $radius-md;
+    transition: all $transition-normal;
+}
+
+.default {
+    box-shadow: $shadow-sm;
+
+    &:hover {
+        box-shadow: $shadow-md;
+    }
+}
+
+.outlined {
+    border: 1px solid var(--mui-palette-divider);
+    box-shadow: none;
+}
+
+.clickable {
+    cursor: pointer;
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: $shadow-lg;
+    }
+
+    &:active {
+        transform: translateY(0);
+    }
+}
+
+.padding-none {
+    padding: 0;
+}
+
+.padding-small {
+    padding: $space-sm;
+}
+
+.padding-medium {
+    padding: $space-md;
+}
+
+.padding-large {
+    padding: $space-lg;
+}

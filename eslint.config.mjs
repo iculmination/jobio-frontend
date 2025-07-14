@@ -1,9 +1,11 @@
+// For more info, see https://github.com/storybookjs/eslint-plugin-storybook#configuration-flat-config-format
 import pluginJs from "@eslint/js";
 import nextPlugin from "@next/eslint-plugin-next";
 import eslintConfigPrettier from "eslint-config-prettier";
 import importPlugin from "eslint-plugin-import";
 import pluginPromise from "eslint-plugin-promise";
 import pluginReact from "eslint-plugin-react";
+import storybook from "eslint-plugin-storybook";
 import unusedImports from "eslint-plugin-unused-imports";
 import globals from "globals";
 import tseslint from "typescript-eslint";
@@ -24,20 +26,20 @@ export default [
                 version: "detect"
             }
         }
-    },
-    pluginJs.configs.recommended, // ? https://github.com/eslint/eslint
-    importPlugin.flatConfigs.recommended, // ? https://github.com/import-js/eslint-plugin-import
-    ...tseslint.configs.recommended, // ? https://github.com/typescript-eslint/typescript-eslint
-    pluginPromise.configs["flat/recommended"], // ? https://github.com/eslint-community/eslint-plugin-promise
+    }, // ? https://github.com/eslint/eslint
+    pluginJs.configs.recommended, // ? https://github.com/import-js/eslint-plugin-import
+    importPlugin.flatConfigs.recommended, // ? https://github.com/typescript-eslint/typescript-eslint
+    ...tseslint.configs.recommended, // ? https://github.com/eslint-community/eslint-plugin-promise
+    pluginPromise.configs["flat/recommended"], // ? https://github.com/jsx-eslint/eslint-plugin-react
     pluginReact.configs.flat.recommended, // ? https://github.com/jsx-eslint/eslint-plugin-react
-    pluginReact.configs.flat["jsx-runtime"], // ? https://github.com/jsx-eslint/eslint-plugin-react
-    eslintConfigPrettier, // ? https://github.com/prettier/eslint-config-prettier
+    pluginReact.configs.flat["jsx-runtime"], // ? https://github.com/prettier/eslint-config-prettier
+    eslintConfigPrettier,
     {
         rules: {
             "no-unused-vars": "off",
             "react/react-in-jsx-scope": "off", // Next.js не требует импорта React
             "react/prop-types": "off", // TypeScript покрывает проверку типов
-            "react/jsx-props-no-spreading": "warn",
+            "react/jsx-props-no-spreading": "off",
             "react/jsx-key": "error",
             "react/jsx-no-duplicate-props": "error",
             "react/jsx-no-undef": "error",
@@ -85,5 +87,6 @@ export default [
     },
     {
         ignores: [".next/*"]
-    }
+    },
+    ...storybook.configs["flat/recommended"]
 ];

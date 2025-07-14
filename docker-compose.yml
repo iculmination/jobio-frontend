@@ -1,0 +1,57 @@
+# version: '3.8'
+
+services:
+    # NestJS Backend
+    backend:
+        build:
+            context: ../jobio-backend
+            dockerfile: Dockerfile
+        container_name: jobio-backend
+        restart: unless-stopped
+        env_file:
+            - ../jobio-backend/config/.env
+        environment:
+            NODE_ENV: development
+            DD_PORT: 8080
+        ports:
+            - "8080:8080"
+        volumes:
+            - ../jobio-backend/config:/app/config:ro
+        healthcheck:
+            test:
+                [
+                    "CMD",
+                    "node",
+                    "-e",
+                    "require('http').get('http://localhost:8080/health', (res) => { process.exit(res.statusCode === 200 ? 0 : 1) })"
+                ]
+            interval: 30s
+            timeout: 10s
+            retries: 3
+            start_period: 40s
+        networks:
+            - jobio-network
+
+    frontend:
+        # NextJS Frontend
+        build:
+            context: .
+            dockerfile: Dockerfile
+        container_name: jobio-frontend
+        ports:
+            - "3000:3000"
+        volumes:
+            - ./:/app
+            - /app/node_modules
+            - /app/.next
+        env_file:
+            - ./.env
+        depends_on:
+            - backend
+        networks:
+            - jobio-network
+        restart: unless-stopped
+
+networks:
+    jobio-network:
+        driver: bridge

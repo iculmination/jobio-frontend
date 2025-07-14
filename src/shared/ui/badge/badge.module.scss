@@ -1,0 +1,74 @@
+@use "@/shared/ui/variables" as *;
+
+.badge {
+    border-radius: $radius-lg;
+    font-weight: $font-weight-medium;
+    transition: all $transition-normal;
+
+    &:hover {
+        transform: translateY(-1px);
+        box-shadow: $shadow-sm;
+    }
+}
+
+.primary {
+    background-color: var(--mui-palette-primary-main);
+    color: white;
+
+    &.outlined {
+        border-color: var(--mui-palette-primary-main);
+        color: var(--mui-palette-primary-main);
+    }
+}
+
+.secondary {
+    background-color: var(--mui-palette-secondary-main);
+    color: white;
+
+    &.outlined {
+        border-color: var(--mui-palette-secondary-main);
+        color: var(--mui-palette-secondary-main);
+    }
+}
+
+.success {
+    background-color: #22c55e;
+    color: white;
+
+    &.outlined {
+        border-color: #22c55e;
+        color: #22c55e;
+    }
+}
+
+.warning {
+    background-color: #f59e0b;
+    color: white;
+
+    &.outlined {
+        border-color: #f59e0b;
+        color: #f59e0b;
+    }
+}
+
+.error {
+    background-color: var(--mui-palette-error-main);
+    color: white;
+
+    &.outlined {
+        border-color: var(--mui-palette-error-main);
+        color: var(--mui-palette-error-main);
+    }
+}
+
+.small {
+    height: 20px;
+    font-size: 0.75rem;
+    padding: 0 $space-xs;
+}
+
+.medium {
+    height: 24px;
+    font-size: 0.8125rem;
+    padding: 0 $space-sm;
+}

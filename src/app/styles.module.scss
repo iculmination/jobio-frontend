@@ -1,8 +1,8 @@
+@use "@/shared/ui/_variables.scss" as *;
+
 .page {
     display: flex;
     flex-direction: column;
-    background-color: #f1f1f1;
-    color: #090909;
     row-gap: 8px;
     align-items: center;
     justify-content: center;

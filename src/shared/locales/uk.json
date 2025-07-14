@@ -6,5 +6,13 @@
         "count": "Лічильник",
         "decrement-count": "Декрементувати",
         "increment-count": "Інкрементувати"
+    },
+    "ui": {
+        "button": {
+            "loading": "Завантаження..."
+        },
+        "input": {
+            "loading": "Завантаження..."
+        }
     }
 }

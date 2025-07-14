@@ -1,0 +1,56 @@
+@use "@/shared/ui/variables" as *;
+
+.select {
+    .MuiSelect-select {
+        border-radius: $radius-md;
+        font-size: 0.875rem;
+        transition: all $transition-normal;
+    }
+
+    .MuiOutlinedInput-notchedOutline {
+        border-color: var(--mui-palette-divider);
+        transition: border-color $transition-normal;
+    }
+
+    &:hover {
+        .MuiOutlinedInput-notchedOutline {
+            border-color: var(--mui-palette-primary-main);
+        }
+    }
+
+    &.Mui-focused {
+        .MuiOutlinedInput-notchedOutline {
+            border-width: 2px;
+            border-color: var(--mui-palette-primary-main);
+        }
+    }
+}
+
+.outlined {
+    .MuiSelect-select {
+        background: transparent;
+    }
+}
+
+.filled {
+    .MuiSelect-select {
+        background-color: var(--mui-palette-background-default);
+        border-radius: $radius-md $radius-md 0 0;
+    }
+}
+
+.small {
+    .MuiSelect-select {
+        height: $input-height-sm;
+        padding: $space-xs $space-sm;
+        font-size: 0.8125rem;
+    }
+}
+
+.medium {
+    .MuiSelect-select {
+        height: $input-height-md;
+        padding: $space-sm $space-md;
+        font-size: 0.875rem;
+    }
+}
