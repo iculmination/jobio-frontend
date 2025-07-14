@@ -2,47 +2,41 @@
 
 import { ReactNode } from "react";
 
-import {
-    Card as MuiCard,
-    CardActions as MuiCardActions,
-    CardContent as MuiCardContent,
-    CardHeader as MuiCardHeader
-} from "@mui/material";
-import { CardProps as MuiCardProps } from "@mui/material/Card";
+import { Card as MuiCard } from "@mui/material";
 import clsx from "clsx";
 
 import styles from "./card.module.scss";
 
-export interface CardProps extends Omit<MuiCardProps, "variant"> {
-    variant?: "elevation" | "outlined";
+export interface CardProps {
     children?: ReactNode;
-    header?: ReactNode;
-    actions?: ReactNode;
+    variant?: "default" | "outlined";
+    padding?: "none" | "small" | "medium" | "large";
+    className?: string;
+    onClick?: () => void;
 }
 
 export const Card = ({
-    variant = "elevation",
     children,
-    header,
-    actions,
+    variant = "default",
+    padding = "medium",
     className,
+    onClick,
     ...props
 }: CardProps) => {
     return (
         <MuiCard
-            elevation={variant === "elevation" ? 2 : 0}
-            variant={variant}
-            className={clsx(styles.card, className)}
+            elevation={variant === "outlined" ? 0 : 1}
+            variant={variant === "outlined" ? "outlined" : "elevation"}
+            className={clsx(
+                styles.card,
+                styles[variant],
+                styles[`padding-${padding}`],
+                { [styles.clickable]: onClick },
+                className
+            )}
+            onClick={onClick}
             {...props}>
-            {header && <MuiCardHeader>{header}</MuiCardHeader>}
-
-            {children && (
-                <MuiCardContent className={styles.cardContent}>{children}</MuiCardContent>
-            )}
-
-            {actions && (
-                <MuiCardActions className={styles.cardActions}>{actions}</MuiCardActions>
-            )}
+            {children}
         </MuiCard>
     );
 };

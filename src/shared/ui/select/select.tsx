@@ -7,28 +7,23 @@ import clsx from "clsx";
 import styles from "./select.module.scss";
 
 export interface SelectProps extends Omit<MuiSelectProps, "variant"> {
-    variant?: "outlined" | "filled" | "standard";
-    component?: React.ElementType;
-    color?: "primary" | "secondary" | "error" | "warning" | "info" | "success";
+    variant?: "outlined" | "filled";
+    size?: "small" | "medium";
 }
 
 export const Select = ({
     variant = "outlined",
-    color = "primary",
+    size = "small",
     children,
     className,
-
     ...props
 }: SelectProps) => {
-    const selectClasses = clsx(
-        styles.select,
-        variant && styles[variant],
-        color && styles[color],
-        className
-    );
-
     return (
-        <MuiSelect variant={variant} className={selectClasses} {...props}>
+        <MuiSelect
+            variant={variant}
+            size={size}
+            className={clsx(styles.select, styles[variant], styles[size], className)}
+            {...props}>
             {children}
         </MuiSelect>
     );

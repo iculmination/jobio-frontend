@@ -1,46 +1,36 @@
 "use client";
 
-import { ReactNode } from "react";
-
-import { Badge as MuiBadge } from "@mui/material";
-import { BadgeProps as MuiBadgeProps } from "@mui/material/Badge";
+import { Chip } from "@mui/material";
+import { ChipProps } from "@mui/material/Chip";
 import clsx from "clsx";
 
 import styles from "./badge.module.scss";
 
-export interface BadgeProps {
-    children: ReactNode;
-    variant?: "primary" | "secondary" | "success" | "warning" | "error" | "info";
-    size?: "small" | "medium" | "large";
-    rounded?: boolean;
+export interface BadgeProps extends Omit<ChipProps, "variant" | "color"> {
+    variant?: "primary" | "secondary" | "success" | "warning" | "error";
+    size?: "small" | "medium";
     outlined?: boolean;
-    className?: string;
-    props?: MuiBadgeProps;
 }
 
 export const Badge = ({
-    children,
     variant = "primary",
-    size = "medium",
-    rounded = false,
+    size = "small",
     outlined = false,
     className,
     ...props
 }: BadgeProps) => {
-    const badgeClasses = clsx(
-        styles.badge,
-        styles[variant],
-        styles[size],
-        {
-            [styles.rounded]: rounded,
-            [styles.outlined]: outlined
-        },
-        className
-    );
-
     return (
-        <MuiBadge className={badgeClasses} {...props}>
-            {children}
-        </MuiBadge>
+        <Chip
+            variant={outlined ? "outlined" : "filled"}
+            size={size}
+            className={clsx(
+                styles.badge,
+                styles[variant],
+                styles[size],
+                { [styles.outlined]: outlined },
+                className
+            )}
+            {...props}
+        />
     );
 };

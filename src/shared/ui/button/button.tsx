@@ -3,64 +3,46 @@
 import { Button as MuiButton } from "@mui/material";
 import { ButtonProps as MuiButtonProps } from "@mui/material/Button";
 import clsx from "clsx";
-import { useTranslations } from "next-intl";
 
 import styles from "./button.module.scss";
 
 export interface ButtonProps extends Omit<MuiButtonProps, "variant"> {
-    variant?: "primary" | "secondary" | "outlined" | "text" | "danger";
-    size?: "small" | "medium" | "large";
-    fullWidth?: boolean;
+    variant?: "primary" | "secondary" | "outlined" | "danger";
     loading?: boolean;
 }
 
 export const Button = ({
     variant = "primary",
-    size = "medium",
     loading,
     children,
     disabled,
     className,
     ...props
 }: ButtonProps) => {
-    const t = useTranslations("ui.button");
-
-    const getMuiVariant = (): MuiButtonProps["variant"] => {
+    const getMuiProps = () => {
         switch (variant) {
             case "primary":
-            case "danger":
-                return "contained";
+                return { variant: "contained" as const, color: "primary" as const };
             case "secondary":
-                return "contained";
+                return { variant: "contained" as const, color: "secondary" as const };
             case "outlined":
-                return "outlined";
-            case "text":
-                return "text";
+                return { variant: "outlined" as const, color: "primary" as const };
+            case "danger":
+                return { variant: "contained" as const, color: "error" as const };
             default:
-                return "contained";
+                return { variant: "contained" as const, color: "primary" as const };
         }
     };
 
-    const getColor = (): MuiButtonProps["color"] => {
-        switch (variant) {
-            case "danger":
-                return "error";
-            case "secondary":
-                return "secondary";
-            default:
-                return "primary";
-        }
-    };
+    const muiProps = getMuiProps();
 
     return (
         <MuiButton
-            variant={getMuiVariant()}
-            color={getColor()}
-            size={size as MuiButtonProps["size"]}
+            {...muiProps}
             disabled={disabled || loading}
-            className={clsx(styles.button, className)}
+            className={clsx(styles.button, styles[variant], className)}
             {...props}>
-            {loading ? t("loading") : children}
+            {loading ? "Loading..." : children}
         </MuiButton>
     );
 };

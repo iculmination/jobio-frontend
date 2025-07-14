@@ -1,2 +1,61 @@
+@use "@/shared/ui/variables" as *;
+@use "@/shared/ui/mixins" as *;
+
 .button {
+    @include button-base;
+    font-weight: $font-weight-medium;
+    padding: $space-sm $space-md;
+    height: $button-height-sm;
+    font-size: 0.875rem;
+    border-radius: $radius-md;
+    box-shadow: $shadow-sm;
+    transition: all $transition-normal;
+
+    &:hover {
+        box-shadow: $shadow-md;
+        transform: translateY(-1px);
+    }
+
+    &:active {
+        transform: translateY(0);
+        box-shadow: $shadow-sm;
+    }
+}
+
+.primary {
+    background: var(--mui-palette-primary-main);
+    color: white;
+
+    &:hover {
+        background: var(--mui-palette-primary-dark);
+    }
+}
+
+.secondary {
+    background: var(--mui-palette-secondary-main);
+    color: white;
+
+    &:hover {
+        background: var(--mui-palette-secondary-dark);
+    }
+}
+
+.outlined {
+    border: 2px solid var(--mui-palette-primary-main);
+    background: transparent;
+    color: var(--mui-palette-primary-main);
+
+    &:hover {
+        background: var(--mui-palette-primary-main);
+        color: white;
+    }
+}
+
+.danger {
+    background: var(--mui-palette-error-main);
+    color: white;
+
+    &:hover {
+        background: var(--mui-palette-error-dark);
+    }
 }

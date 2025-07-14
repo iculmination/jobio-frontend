@@ -1,0 +1,60 @@
+@use "./variables" as *;
+
+@mixin button-base {
+    border: none;
+    cursor: pointer;
+    font-weight: $font-weight-medium;
+    transition: all $transition-normal;
+    border-radius: $radius-md;
+
+    &:focus-visible {
+        outline: 2px solid var(--mui-palette-primary-main);
+        outline-offset: 2px;
+    }
+}
+
+@mixin button-compact {
+    @include button-base;
+    padding: $space-sm $space-md;
+    font-size: 0.875rem;
+    height: $button-height-sm;
+}
+
+@mixin card-modern {
+    background: var(--mui-palette-background-paper);
+    border-radius: $radius-md;
+    box-shadow: $shadow-sm;
+    transition: box-shadow $transition-normal;
+
+    &:hover {
+        box-shadow: $shadow-md;
+    }
+}
+
+@mixin input-compact {
+    height: $input-height-sm;
+    padding: $space-xs $space-sm;
+    font-size: 0.875rem;
+    border-radius: $radius-md;
+}
+
+@mixin flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@mixin flex-between {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+@mixin gradient-purple-bg {
+    background: $gradient-purple;
+    color: white;
+}
+
+@mixin smooth-transition {
+    transition: all $transition-normal;
+}

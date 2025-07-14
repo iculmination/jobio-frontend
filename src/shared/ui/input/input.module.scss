@@ -1,2 +1,63 @@
+@use "@/shared/ui/variables" as *;
+@use "@/shared/ui/mixins" as *;
+
 .input {
+    .MuiInputBase-root {
+        border-radius: $radius-md;
+        font-size: 0.875rem;
+        transition: all $transition-normal;
+
+        &:hover {
+            .MuiOutlinedInput-notchedOutline {
+                border-color: var(--mui-palette-primary-main);
+            }
+        }
+
+        &.Mui-focused {
+            .MuiOutlinedInput-notchedOutline {
+                border-width: 2px;
+                border-color: var(--mui-palette-primary-main);
+            }
+        }
+    }
+
+    .MuiInputLabel-root {
+        font-size: 0.875rem;
+        font-weight: $font-weight-medium;
+
+        &.Mui-focused {
+            color: var(--mui-palette-primary-main);
+        }
+    }
+}
+
+.outlined {
+    .MuiOutlinedInput-notchedOutline {
+        border-color: var(--mui-palette-divider);
+    }
+}
+
+.filled {
+    .MuiFilledInput-root {
+        background-color: var(--mui-palette-background-default);
+        border-radius: $radius-md $radius-md 0 0;
+
+        &:hover {
+            background-color: var(--mui-palette-action-hover);
+        }
+    }
+}
+
+.small {
+    .MuiInputBase-root {
+        height: $input-height-sm;
+        font-size: 0.8125rem;
+    }
+}
+
+.medium {
+    .MuiInputBase-root {
+        height: $input-height-md;
+        font-size: 0.875rem;
+    }
 }
